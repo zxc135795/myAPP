@@ -37,7 +37,6 @@ def index(request):
 
 def detail(request, articleid):
     try:
-        notes = Note.objects.all()
         artic = Article.objects.all()
         recommends = Recommend.objects.all()[:3:]
         articles = Article.objects.filter(id=articleid)

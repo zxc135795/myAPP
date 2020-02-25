@@ -30,7 +30,7 @@
                 <p class="clearfix entry-content">
                     {{ result.object.body|safe|truncatechars_html:20 }}
                 </p>
-                {% empty %}
+
                 <div class="article_list_link">
                 <span class="article_list_count">
                     <i class="see_count"></i>
@@ -42,6 +42,8 @@
                 </span>
                     <a href="{% url 'myblogapp:detail' result.object.id %}">查看详细+</a>
                 </div>
+                {% empty %}
+                <p>啥也没找到</p>
             </li>
             {% endfor %}
         </ul>
