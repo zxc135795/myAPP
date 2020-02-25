@@ -44,8 +44,8 @@ class Comment(models.Model):
 
 class Note(models.Model):
     title = models.CharField(max_length=20, verbose_name='笔记名称')
-    notetime = models.DateTimeField(auto_now_add=True, verbose_name='记录时间')
-    notebody = models.TextField(verbose_name='笔记内容')
+    note_time = models.DateTimeField(auto_now_add=True, verbose_name='记录时间')
+    note_body = models.TextField(verbose_name='笔记内容')
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='所属文章')
 
     def __str__(self):
