@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="article_content_box clearfix">
+    {% for articles in articles %}
+    <div class="article_article_title">
+        <h3>最新模板
+            <span>您当前的位置：<a href="{% url 'myblogapp:index'%}">首页></a><a href="{% url 'myblogapp:list'%}">列表页></a><a href="#">内容页</a></span>
+        </h3>
+    </div>
+
+    <h3 class="article_content_title">{{articles.title}}</h3>
+    <div class="article_author_count_box clearfix">
+        <i class="article_author_img" title="天悦"><img src="/static/img/self_touxiang.jpg"></i><a
+            class="article_author"
+            href="{% url 'myblogapp:about'%}">{{articles.author}}</a>
+        <p>发表时间：{{articles.create_time}}</p>
+        <p>查看次数：{{articles.views}}</p>
+            {{articles.note_set.all}}
+        <p>评论次数：{{articles.comment_set.count}}</p>
+    </div>
+
+    <div class="article_content">
+            {{articles.body|safe}}
+    </div>
+
+
+    <div class="article_end">
+        <p>注：本文由：{{articles.author}} 作者：<a href="#">{{articles.author}}</a> 发表，其版权均为作者所有，如需转载请注明文章出处及作者。</p>
+    </div>
+{% endfor %}
+</div>
+
+<div class="article_like_article">
+    <div class="article_article_title">
+        <h3>相关文章</h3>
+    </div>
+    <div class="article_like_list">
+        <a href="http://www.baidu.com">相似文章相似文章相似文章相似文章相似文章</a>
+    </div>
+</div>
+
+
+<div class="pinglun_box">
+
+    <div class="article_article_title">
+        <h3>文章笔记</h3>
+    </div>
+    {% for articles in articles  %}
+    {% for note in articles.note_set.all %}
+
+    <h3 class="article_content_title">{{note.title}}</h3>
+    <div class="article_author_count_box clearfix">
+        <i class="article_author_img" title="天悦">
+            <img src="/static/img/self_touxiang.jpg">
+        </i>
+        <a class="article_author"
+            href="{% url 'myblogapp:about'%}">{{articles.author}}</a>
+        <p>发表时间：{{note.notetime}}</p>
+        <div class="article_content">
+            {{note.notebody|safe}}
+        </div>
+    </div>
+
+{% endfor %}
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

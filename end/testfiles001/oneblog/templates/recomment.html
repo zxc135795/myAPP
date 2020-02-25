@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+
+<div class="article_content_box clearfix">
+
+    <div class="article_article_title">
+        <h3>最新模板
+            <span>您当前的位置：<a href="{% url 'myblogapp:index'%}">首页></a><a href="{% url 'myblogapp:list'%}">列表页></a><a href="#">笔记</a></span>
+        </h3>
+    </div>
+    {% for note in notes %}
+    <h3 class="article_content_title"><a href="{% url 'myblogapp:detail' note.article.id%}">{{note.title}}</a></h3>
+    <div class="article_author_count_box clearfix">
+        <i class="article_author_img" title="天悦"><img src="/static/img/self_touxiang.jpg"></i><a
+            class="article_author"
+            href="{% url 'myblogapp:about'%}">{{articles.author}}</a>
+        <p>发表时间：{{note.note_time}}</p>
+        <p>所属文章；{{note.article.title}}</p>
+
+
+    </div>
+
+    <div class="article_content">
+            {{note.note_body|safe}}
+    </div>
+
+{% endfor %}
+</div>
+
+
+
+
+{% endblock %}

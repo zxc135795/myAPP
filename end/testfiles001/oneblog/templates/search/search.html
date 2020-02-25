@@ -1,0 +1,57 @@
+{% extends 'base.html'%}
+
+{% block title %}
+搜索结果
+{% endblock %}
+
+{% block main %}
+
+
+<!--首页最新模板部分-->
+<div class="left">
+
+    <!--首页最新模板部分-->
+    <div class="list_article_title clearfix">
+        <h3>搜索内容</h3>
+        <p>亲，您搜索的结果都在下面了哦！</p>
+    </div>
+
+
+    <div class="article_box_one">
+        {% if query %}
+        <ul class="index_article">
+            {% for result in page.object_list %}
+            <li class="clearfix article_list">
+
+                <a href="#" class="article_list_img">
+                    <img src="/media/{{result.object.tags.img}}">
+                </a>
+                <a href="{% url 'myblogapp:detail' result.object.id %}"><h3>{{result.object.title }} </h3></a>
+                <p class="clearfix entry-content">
+                    {{ result.object.body|safe|truncatechars_html:20 }}
+                </p>
+                {% empty %}
+                <div class="article_list_link">
+                <span class="article_list_count">
+                    <i class="see_count"></i>
+                    查看次数:{{ result.object.views }}
+                </span>
+                    <span class="article_list_like">
+                   <i class="like_count"></i>
+                    评论:{{ result.object.comment_set.count }}
+                </span>
+                    <a href="{% url 'myblogapp:detail' result.object.id %}">查看详细+</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+

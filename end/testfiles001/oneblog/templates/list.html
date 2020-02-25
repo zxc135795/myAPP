@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+<!--首页最新模板部分-->
+<div class="list_article_title clearfix">
+    <h3>内容总览</h3>
+    <p style="color: #0e84b5">感谢观阅</p>
+</div>
+<div class="article_box_one">
+
+    <ul class="index_article">
+        {% for ac in page.object_list %}
+        <li class="clearfix article_list">
+
+            <a href="#" class="article_list_img">
+                <img src="/media/{{ac.tags.img}}">
+            </a>
+            <a href="{% url 'myblogapp:detail' ac.id %}"><h3>{{ac.title }} </h3></a>
+            <p class="clearfix entry-content">
+                {{ ac.body|safe|truncatechars_html:20 }}
+            </p>
+            <div class="article_list_link">
+                <span class="article_list_count">
+                    <i class="see_count"></i>
+                    查看次数:{{ ac.views }}
+                </span>
+                <span class="article_list_like">
+                   <i class="like_count"></i>
+                    评论:{{ ac.comment_set.count }}
+                </span>
+                <a href="{% url 'myblogapp:detail' ac.id %}">查看详细+</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="pagination col-md-11">
+    <ul>
+        {% if page.has_previous %}
+        <li class="col-md-2"><a href="?pagenum={{page.previous_page_number}}">上一页</a></li>
+        {% endif %}
+
+        {% for peg in page.paginator.page_range %}
+        {% if peg == page.number %}
+
+        <li class="current col-md-1"><a href="?pagenum={{peg}}">{{peg}}</a></li>
+        {% else %}
+        <li class="col-md-1"><a href="?pagenum={{peg}}">{{peg}}</a></li>
+        {% endif %}
+
+        {% endfor %}
+
+        {% if page.has_next %}
+        <li class="col-md-2"><a href="?pagenum={{ page.next_page_number}}">下一页</a></li>
+        {% endif %}
+    </ul>
+
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
